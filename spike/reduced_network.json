@@ -1,0 +1,38 @@
+{
+  "model": "BIOMD0000000151_reduced_il6_jak_stat_socS3_starter",
+  "description": "Five-node starter topology for an SBML-to-Netflux feasibility spike on IL-6 signaling.",
+  "input_nodes": ["IL6"],
+  "observable_nodes": ["IL6R", "JAK", "STAT3", "SOCS3"],
+  "nodes": [
+    {"id": "IL6", "type": "input", "initial": 0.0},
+    {"id": "IL6R", "type": "signaling", "initial": 0.0},
+    {"id": "JAK", "type": "signaling", "initial": 0.0},
+    {"id": "STAT3", "type": "transcription_factor", "initial": 0.0},
+    {"id": "SOCS3", "type": "feedback", "initial": 0.0}
+  ],
+  "edges": [
+    {"source": "IL6", "target": "IL6R", "sign": 1},
+    {"source": "IL6R", "target": "JAK", "sign": 1},
+    {"source": "JAK", "target": "STAT3", "sign": 1},
+    {"source": "STAT3", "target": "SOCS3", "sign": 1},
+    {"source": "SOCS3", "target": "JAK", "sign": -1}
+  ],
+  "parameter_bounds": {
+    "edge_weight": [0.05, 3.0],
+    "hill_coefficient": [1.0, 4.0],
+    "ec50": [0.05, 0.95],
+    "basal_activity": [0.0, 0.2],
+    "time_constant_minutes": [2.0, 120.0],
+    "decay_rate": [0.001, 1.0],
+    "input_scale": [0.1, 2.0]
+  },
+  "default_parameters": {
+    "edge_weight": 1.0,
+    "hill_coefficient": 2.0,
+    "ec50": 0.5,
+    "basal_activity": 0.02,
+    "time_constant_minutes": 20.0,
+    "decay_rate": 0.05,
+    "input_scale": 1.0
+  }
+}
